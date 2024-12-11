@@ -1,0 +1,220 @@
+        // Attempts to open the file and scan through it
+        try {
+            // takes the first command line argument and opens that file
+            file = new File(args[0]);
+            
+            // creates a scanner object
+            Scanner scanner = new Scanner(file);
+
+            // creates a command processor object
+            CommandProcessor cmdProc = new CommandProcessor();
+
+            // reads the entire file and processes the commands
+            // line by line
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                // determines if the file has more lines to read
+                if (!line.trim().isEmpty()) {
+                    cmdProc.processor(line.trim());
+                }
+            }
+            // closes the scanner
+            scanner.close();
+        }
+        
+        //////////
+        
+
+/* At the end of your program, the data file (on disk) should be in a sorted state. Do not forget to flush buffers from your buffer pool as necessary at the end, or they will not update the file correctly. 
+
+In addition to sorting the data file, you will generate and output some statistics about the execution of your program. Write these statistics to <stat-file-name>. Make sure your program DOES NOT overwrite <stat-file-name> each time it is run; instead, have it append new statistics to the end of the file. The information to write is as follows. 
+
+    The name of the data file being sorted. 
+    
+    The number of cache hits, or times your program found the data it needed in a buffer and did not have to go to the disk. 
+    
+    The number of disk reads, or times your program had to read a block of data from disk into a buffer. 
+    
+    The number of disk writes, or times your program had to write a block of data to disk from a buffer. 
+    
+    The time that your program took to execute the Quicksort. Put two calls to the standard Java timing method System.currentTimeMillis() in your program, one when you call the sort function, and one when you return from the sort function. This method returns a long value. The difference between the two values will be the total runtime in milliseconds. You should ONLY time the sort, and not the time to write the program output as described above. 
+        
+   */     
+        //////////
+        
+        
+        /// setter and getter of cache hits and disk reading writing time 
+        
+        /**
+     * Getter of buffer cache hits
+     * 
+     * 
+     * @return cacheHits integer number of cache hits 
+     */
+    public int getCacheHits() {
+        return cacheHits;
+    }
+
+    /**
+     * Setter of buffer cache hits 
+     * 
+     * @param cHits
+     *            integer value that is used to set the cacheHits and may be used to clear the counter
+     */
+
+    public void setCacheHits(int cHits) {
+        this.cacheHits = cHits;
+    }
+
+    /**
+     * Getter of Disk reads
+     * 
+     * 
+     * @return diskReads integer counter of disk reads
+     */
+    public int getDiskReads() {
+        return diskReads;
+    }
+
+
+    /**
+     * Setter for buffer disk reads 
+     * 
+     * @param dReads
+     *            integer value that is used to set the disk reads and may be used to clear the counter
+     */
+    public void setDiskReads(int dReads) {
+        this.diskReads = dReads;
+    }
+
+    /**
+     * Getter of buffer disk writes
+     * 
+     * 
+     * @return cacheHits integer number of disk writes 
+     */
+    public int getDiskWrites() {
+        return diskWrites;
+    }
+
+    /**
+     * Setter of buffer disk writes 
+     * 
+     * @param dWrites
+     *            integer value that is used to set disk writes and may be used to clear the counter
+     */
+    public void setDiskWrites(int dWrites) {
+        this.diskWrites = dWrites;
+    }
+
+    /**
+     * Getter of buffer reading time
+     * 
+     * 
+     * @return bufferReadingTime long value of buffer reading time 
+     */
+    public long getBufferReadingTime() {
+        return bufferReadingTime;
+    }
+
+
+    public void setBufferReadingTime(long bufferReadingTime) {
+        this.bufferReadingTime = bufferReadingTime;
+    }
+
+    /**
+     * Getter of buffer cache hits
+     * 
+     * 
+     * @return cacheHits integer number of cache hits 
+     */
+    public long getDiskReadingTime() {
+        return diskReadingTime;
+    }
+
+
+    public void setDiskReadingTime(long diskReadingTime) {
+        this.diskReadingTime = diskReadingTime;
+    }
+
+    /**
+     * Getter of buffer cache hits
+     * 
+     * 
+     * @return cacheHits integer number of cache hits 
+     */
+    public long getDiskWritingTime() {
+        return diskWritingTime;
+    }
+
+
+    public void setDiskWritingTime(long diskWritingTime) {
+        this.diskWritingTime = diskWritingTime;
+    }
+    
+     System.currentTimeMillis();
+     
+     
+     // /**
+// * Flush the buffer pool
+// *
+// * @throws IOException
+// * @return when flush we need to return the statistics
+// */
+// public List<List<?>> flush() throws IOException {
+// // flush iterator to move over buffers and check each writing status
+// Iterator<Buffer> flushStackItr = buffers.iterator();
+// while (flushStackItr.hasNext()) {
+// Buffer flushBuffNext = flushStackItr.next();
+// // check if the writing status of the buffer is true then write the
+// // buffer to file
+// if (flushBuffNext.getWritingStatus()) {
+// this.writingBlockToDisk(flushBuffNext);
+// }
+// }
+// // declaration of statistics
+// List<List<?>> listOfLists = new ArrayList<>();
+// List<Integer> counters = new ArrayList<>();
+// List<Long> timers = new ArrayList<>();
+// counters.add(this.getTotalCacheHits());
+// counters.add(this.getTotalDiskReads());
+// counters.add(this.getTotalDiskWrites());
+//
+// timers.add(this.getTotalBufferReadingTime());
+// timers.add(this.getTotalDiskReadingTime());
+// timers.add(this.getTotalDiskWritingTime());
+//
+// listOfLists.add(counters);
+// listOfLists.add(timers);
+//
+// // clear buffers
+// buffers.clear();
+// // return record statistics
+// return listOfLists;
+// }
+
+java.lang.NullPointerException
+	at java.base/java.io.RandomAccessFile.readBytes(Native Method)
+	at java.base/java.io.RandomAccessFile.read(RandomAccessFile.java:405)
+	at BufferPool.readBytes(BufferPool.java:297)
+	at Swap.swap(Swap.java:19)
+	at Quicksort.quicksort(Quicksort.java:169)
+	at Quicksort.main(Quicksort.java:108)
+	at QuicksortTest.testSorting(QuicksortTest.java:80)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at student.testingsupport.junit4.RunTestMethodWrapper.evaluate(RunTestMethodWrapper.java:74)
+	at student.testingsupport.junit4.FailOnTimeout_4_12$CallableStatement.call(FailOnTimeout_4_12.java:330)
+	at student.testingsupport.junit4.FailOnTimeout_4_12$CallableStatement.call(FailOnTimeout_4_12.java:1)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+

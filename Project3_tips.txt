@@ -1,0 +1,176 @@
+no testing on WebCat
+don't upload input files (only source code)
+key value ranges (1-30000)
+
+1 Record = 4 bytes (2-byte key, 2-byte value)
+1 Block = 1024 Records (4096 bytes)
+1 Buffer stores 1 Block = 1024 Records (4096 bytes)
+Bufferpool = the number of Buffers
+
+
+OPTIMIZATION 
+  - Efficient bufferpool code (LRU)
+  - Insertion sort trick (one insertion sort call after the quick sort is done)
+  - Handling DUPLICATES
+  
+  - pivot selection
+  - 3-way partitioning (duplicates)
+  
+
+statfile
+  APPEND
+  
+
+****reading from binary file using  RandomAccessFile class
+
+
+**** bufferpool methods- main idea pseudo code
+- getBytes (byte[] stuff, int byteNo, int numBytes) //read record
+block = byteNo / buffSize;
+pos = byteNo % buffSize;
+
+myFile.seek(block * buffSize);
+int temp = myFile.read(buff, 0, buffSize);
+
+System.arraycopy(buff, pos, stuff, 0, numBytes);
+
+
+
+- write(byte[] stuff, int byteNo, int numBytes)
+block = byteNo / buffSize;
+pos = byteNo % buffSize;
+System.arraycopy(stuff, 0, buff, pos, numBytes);
+
+
+- writeToFile
+myFile.seek(buffSize * blockID);
+myFile.write(buff, 0, buffSize);
+
+****interpreting the bytes read into records
+byte[] rec = new byte[4];  //filled somewhere else
+
+
+ByteBuffer bb = ByteBuffer.wrap(rec);
+short key = bb.getShort();
+
+
+/////////////////////////////////////////////////////////
+//// OpenDSA BufferPool interfaces
+/////////////////////////////////////////////////////////
+
+//// Interface of the BufferPool
+    // ADT for buffer pools using the message-passing style
+// public interface BufferPoolADT {
+// // Copy "sz" bytes from "space" to position "pos" in the buffered
+// // storage
+// public void insert(byte[] space, int sz, int pos);
+//
+//
+// // Copy "sz" bytes from position "pos" of the buffered storage to
+// // "space"
+// public void getbytes(byte[] space, int sz, int pos);
+//
+//
+// // Return pointer to the requested block
+// public byte[] getblock(int block);
+//
+//
+// // Set the dirty bit for the buffer holding "block"
+// public void dirtyblock(int block);
+//
+//
+// // Tell the size of a buffer
+// public int blocksize();
+//
+//
+// // Read the associated block from disk (if necessary) and return a
+// // pointer to the data
+// public byte[] readBlock();
+//
+//
+// // Return a pointer to the buffer's data array (without reading from
+// // disk)
+// public byte[] getDataPointer();
+//
+//
+// // Flag buffer's contents as having changed, so that flushing the
+// // block will write it back to disk
+// public void markDirty();
+//
+//
+// // Release the block's access to this buffer. Further accesses to
+// // this buffer are illegal
+// public void releaseBuffer();
+//
+//
+// // Relate a block to a buffer, returning a pointer to a buffer object
+// BufferPool acquireBuffer(int block);
+// }
+ 
+///// A simple buffer pool defined as two dimensional array
+
+/**
+ * In the following basic bufferPool Class
+ * Create a simple buffer pool class that manages a fixed-size array of byte
+ * buffers.
+ * Implement methods for reading data from and writing data to the buffers.
+ * Use simple read and write operations without worrying about disk I/O or
+ * asynchronous processing.
+ *
+ * The project requirements:
+ * 
+ * @author Emadeldin-Abdrabou-emazied
+ *
+ * @version 2024-03-22
+ */
+public class BufferPool {
+    // Array of buffers 
+    // Two dimensional arrays rows are buffer numbers, columns are buffer size
+    private byte[][] buffers;
+    private int bufferSize;
+
+    /**
+     * Constructor
+     * 
+     * @param numBuffers
+     *            integer number of buffers in the buffer pool
+     * @param bufferSize
+     *            integer buffer size
+     */
+
+    public BufferPool(int numBuffers, int bufferSize) {
+        this.buffers = new byte[numBuffers][bufferSize];
+        this.bufferSize = bufferSize;
+    }
+
+
+    /**
+     * Reading buffer content
+     * 
+     * @param bufferIndex
+     *            integer number of buffers in the buffer pool
+     * @return buffers byte contents of a buffer
+     */
+
+    public byte[] readBuffer(int bufferIndex) {
+        return buffers[bufferIndex];
+    }
+
+
+    /**
+     * writing to buffer
+     * 
+     * @param bufferIndex
+     *            integer number of buffers in the buffer pool
+     * @param data
+     *            to be read and stored as byte contents in a buffer
+     */
+    public void writeBuffer(int bufferIndex, byte[] data) {
+        System.arraycopy(data, 0, buffers[bufferIndex], 0, Math.min(data.length,
+            bufferSize));
+    }
+
+    /// the rest of methods
+
+}
+ 

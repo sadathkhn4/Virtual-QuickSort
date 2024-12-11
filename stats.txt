@@ -1,0 +1,83 @@
+Data File Name: input.bin
+Cache Hits: 19395
+Disk Reads: 1
+Disk Writes: 1
+Runtime: 20 milliseconds
+Data File Name: input.bin
+Cache Hits: 24129
+Disk Reads: 1
+Disk Writes: 1
+Runtime: 6 milliseconds
+
+Data File Name: input.bin
+Cache Hits: 22283
+Disk Reads: 1
+Disk Writes: 1
+Runtime: 10 milliseconds
+
+Data File Name: input.bin
+Cache Hits: 22935
+Disk Reads: 1
+Disk Writes: 1
+Runtime: 21 milliseconds
+
+Data File Name: input.bin
+Cache Hits: 22568
+Disk Reads: 1
+Disk Writes: 1
+Runtime: 17 milliseconds
+
+Data File Name: input.bin
+Cache Hits: 22987
+Disk Reads: 1
+Disk Writes: 1
+Runtime: 12 milliseconds
+
+Data File Name: input.bin
+Cache Hits: 22321
+Disk Reads: 1
+Disk Writes: 1
+Runtime: 21 milliseconds
+
+Data File Name: input.bin
+Cache Hits: 22474
+Disk Reads: 1
+Disk Writes: 1
+Runtime: 17 milliseconds
+
+Data File Name: input.bin
+Cache Hits: 22467
+Disk Reads: 1
+Disk Writes: 1
+Runtime: 17 milliseconds
+
+Data File Name: input.bin
+Cache Hits: 22557
+Disk Reads: 1
+Disk Writes: 1
+Runtime: 15 milliseconds
+
+Data File Name: input.bin
+Cache Hits: 22642
+Disk Reads: 1
+Disk Writes: 1
+Runtime: 20 milliseconds
+
+Data File Name: input.bin
+Cache Hits: 22672
+Disk Reads: 1
+Disk Writes: 1
+Runtime: 23 milliseconds
+
+Data File Name: input.bin
+Cache Hits: 22971
+Disk Reads: 1
+Disk Writes: 1
+Runtime: 17 milliseconds
+
+Data File Name: input.bin
+Cache Hits: 24276
+Disk Reads: 1
+Disk Writes: 1
+Runtime: 9 milliseconds
+
